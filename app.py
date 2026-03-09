@@ -95,7 +95,7 @@ if "document_text" not in st.session_state:
 if "chunks" not in st.session_state:
     st.session_state.chunks = []
 
-# YOUR CSS
+# CSS
 st.markdown("""
 <style>
 .main-title { font-size: 40px; font-weight: 700; }

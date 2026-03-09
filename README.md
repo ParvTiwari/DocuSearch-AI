@@ -23,8 +23,8 @@ AI-powered document Q&A system — upload PDFs, DOCX, and TXT files to get insta
 
 ```bash
 # Clone & install
-git clone https://github.com/ParvTiwari/DocuSearch.git
-cd docusearch
+git clone https://github.com/ParvTiwari/DocuSearch-AI.git
+cd docusearch-ai
 pip install -r requirements.txt
 
 # Run locally
@@ -36,7 +36,7 @@ streamlit run app.py
 ```text
 Frontend: Streamlit
 AI: Groq API (Llama-3.3-70B-Versatile)
-Document Processing: PyPDF2, python-docx
+Document Processing: PyPDF, python-docx
 Retrieval: Custom keyword-based RAG
 Deployment: Streamlit Cloud
 ```
@@ -80,7 +80,7 @@ docusearch/
 
 - [Streamlit](https://streamlit.io/) — Amazing web UI framework
 - [Groq](https://groq.com/) — Lightning-fast AI inference
-- [PyPDF2](https://pypi.org/project/PyPDF2/) — PDF processing
+- [PyPDF](https://pypi.org/project/PyPDF2/) — PDF processing
 - [python-docx](https://pypi.org/project/python-docx/) — DOCX support
 
 Built for students by students 🚀
