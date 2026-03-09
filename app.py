@@ -1,6 +1,6 @@
 import streamlit as st
 import os
-from groq import Groq
+from openai import OpenAI
 from pypdf import PdfReader
 import docx
 from dotenv import load_dotenv
@@ -8,12 +8,12 @@ from dotenv import load_dotenv
 st.set_page_config(page_title="DocuSearch AI", page_icon="📄", layout="wide")
 
 load_dotenv()
-GROQ_API_KEY = os.getenv("GROQ_API_KEY")
-if not GROQ_API_KEY:
-    st.error("Add GROQ_API_KEY to .env or Streamlit secrets!")
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+if not OPENAI_API_KEY:
+    st.error("Add OPENAI_API_KEY to .env or Streamlit secrets!")
     st.stop()
 
-client = Groq(api_key=GROQ_API_KEY)
+client = OpenAI(api_key=OPENAI_API_KEY)
 
 def load_document(uploaded_file):
     file_ext = uploaded_file.name.lower().split('.')[-1]
@@ -73,16 +73,16 @@ Question: {question}
 
 Answer:"""
 
-def get_answer_from_groq(prompt):
+def get_answer_from_openai(prompt):
 
     response = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
+        model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": "You are a Teacher who assists student in studying."},
             {"role": "user", "content": prompt},
         ],
         temperature=0.3,
-        max_completion_tokens=4096,
+        max_tokens=1000,
     )
 
     return response.choices[0].message.content.strip()
@@ -95,7 +95,7 @@ if "document_text" not in st.session_state:
 if "chunks" not in st.session_state:
     st.session_state.chunks = []
 
-# YOUR CSS
+# CSS
 st.markdown("""
 <style>
 .main-title { font-size: 40px; font-weight: 700; }
@@ -156,7 +156,7 @@ else:
                 with st.chat_message("assistant"):
                     with st.spinner("Generating answer..."):
                         prompt = build_prompt(best_chunk, question)
-                        answer = get_answer_from_groq(prompt)
+                        answer = get_answer_from_openai(prompt)
                         st.markdown(answer)
                 
                 with st.expander("📖 Source Context"):
