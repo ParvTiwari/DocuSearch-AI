@@ -2,6 +2,88 @@
 
 AI-powered document Q&A system — upload PDFs, DOCX, and TXT files to get instant answers from your study materials.
 
+## 🧩 Problem
+
+Students and developers often struggle to efficiently extract useful information from large documents like research papers, notes, and technical documentation.
+
+Traditional search (Ctrl+F) fails when:
+
+- The query is semantic (not exact keyword match)
+- Information is spread across multiple sections
+- Context is required to understand answers
+
+👉 **Goal:** Build a fast, lightweight system that enables natural language querying over personal documents.
+
+---
+
+## 💡 Approach
+
+This project implements a **lightweight RAG (Retrieval-Augmented Generation)** pipeline:
+
+### 1. Document Parsing
+- Extract text from PDF, DOCX, and TXT files
+
+### 2. Chunking Strategy
+- Split text into ~300-word chunks with overlap  
+- Preserves context across boundaries  
+
+### 3. Retrieval Layer
+- Keyword-based scoring system  
+- Filters chunks with minimum relevance threshold (≥ 2 matches)  
+
+### 4. Generation Layer
+- Selected context passed to Groq Llama-3.3-70B  
+- Generates accurate, context-grounded answers  
+
+### 5. UI Layer
+- Built with Streamlit for simplicity and fast deployment  
+
+---
+
+## 🔁 Iterations
+
+- **V1:** Basic document upload + full text search  
+- **V2:** Added chunking to improve retrieval accuracy  
+- **V3:** Introduced keyword scoring + filtering (reduced noise)  
+- **V4:** Integrated Groq LLM for fast inference  
+- **V5:** Added source context display for answer verification  
+- **V6 (Current):** Optimized chunk size & overlap for better recall
+
+---
+
+## ⚙️ Key Design Decisions
+
+### 🔹 Keyword-based retrieval instead of embeddings
+- Faster, simpler, no heavy infrastructure  
+- Trade-off: lower semantic understanding  
+
+### 🔹 Chunk size (~300 words)
+- Balances context richness and retrieval precision  
+
+### 🔹 Minimum relevance threshold (≥ 2 matches)
+- Reduces hallucinations by filtering weak matches  
+
+### 🔹 Groq LLM over OpenAI
+- Much faster inference  
+- Better real-time user experience  
+
+### 🔹 Streamlit UI
+- Rapid prototyping and deployment  
+- Minimal frontend overhead  
+
+---
+
+## ⏱️ Daily Time Commitment
+
+- Average: **2–3 hours/day**  
+- Total duration: **~10–12 days**
+
+### 📊 Breakdown
+
+- Core logic & RAG pipeline: 5 days  
+- UI & integration: 3 days  
+- Improvements: 2–4 days  
+
 ## ✨ Features
 
 - 📚 **Multi-format support:** PDF, DOCX, TXT files
